@@ -9,11 +9,13 @@ import os, re
 ############################################################
 
 
-#The path to your dota 2 custom games directory 
-dota_path = "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\570"
+#The path to your dota 2 custom games directory
+#Mine is C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\570
+dota_path = "GIVE ME A PATH"
 
 #List of the custom games you do NOT want to delete
-game_list = ["Dota 12v12", "Overthrow 2.0",  "AGHANIM'S PATHFINDERS", "ATTACK ON HERO"]
+#My list is [Dota 12v12", "Overthrow 2.0",  "AGHANIM'S PATHFINDERS", "ATTACK ON HERO"]
+game_list = [" ", " "]
 
 
 #Class for functions enablig the detection of uneccessary custom game files
@@ -29,7 +31,7 @@ class Dota2DiskCleaner():
         self.start_cleaning()
         self.print_summary()
 
-    #Function printing the deletion summary
+    #Printing a summary for the removed files
     def print_summary(self):
         if self.files_deleted == 0:
             print("No files were deleted")
@@ -39,7 +41,7 @@ class Dota2DiskCleaner():
             print("Total space cleared: {}".format(self.byte_conversion(self.total_bytes)))
             print("Custom games removed:\n\t{}".format("\n\t".join(self.removed_custom_games)))
 
-    #Function for converting the total amount of bytes to a suitable metric
+    #Converting the total amount of bytes to a suitable metric
     def byte_conversion(self, byte_amount):
         power = 2**10
         n = 0
@@ -49,7 +51,7 @@ class Dota2DiskCleaner():
             n += 1
         return str(round(byte_amount)) + " " + power_labels[n]+'bytes'
        
-    #Function for deleting .vpk or .lua files which are the most space consuming files
+    #Deletes unwanted .vpk or .lua files
     def delete_vpk_lua_files(self, folder, game_title):
         for file in os.listdir(folder):
             if file.endswith(".lua") or file.endswith(".vpk"):
@@ -64,6 +66,7 @@ class Dota2DiskCleaner():
                     print("Unable to remove {}".format(file))
 
     #Iterates through all of the custom game folders in the given path
+    #And checks if it contains files for unwanted games
     def start_cleaning(self):
         for folder in os.listdir(dota_path):
             folder = dota_path + "\\" + folder
