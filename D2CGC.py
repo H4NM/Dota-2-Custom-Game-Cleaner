@@ -76,13 +76,10 @@ class Dota2DiskCleaner():
 
                         contents = f.read().decode("utf-8")
                         game_title = re.findall('"(.*?)"', contents)[2]
-                        approved = False
                         
                         if game_title in game_list:
-                            approved = True
                             continue
-                           
-                        if approved == False:
+                        else:
                             self.delete_vpk_lua_files(folder, game_title)
                             
 
